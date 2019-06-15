@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  webserver:
+    image: webdevops/php-nginx:7.3
+    ports:
+      - 8080:80
+    volumes:
+      - ./src/feeder:/home/feeder
+    links:
+      - db
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: currency
+    ports:
+      - 3306:3306
+    command: mysqld --default-authentication-plugin=mysql_native_password
