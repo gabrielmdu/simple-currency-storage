@@ -7,7 +7,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./src/feeder:/home/feeder
+      - ./src:/home/simple-currency-storage
     links:
       - db
 
