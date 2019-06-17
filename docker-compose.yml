@@ -19,5 +19,5 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./src/db.sql:/docker-entrypoint-initdb.d/db.sql:ro
-    command: mysqld --default-authentication-plugin=mysql_native_password
+      - ./src/db.sql:/docker-entrypoint-initdb.d/db.sql:ro # executes the SQL script on the initialization
+    command: mysqld --default-authentication-plugin=mysql_native_password # required since MySQL 8

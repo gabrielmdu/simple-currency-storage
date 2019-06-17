@@ -14,5 +14,5 @@ try {
         sleep(10);
     }
 } catch (\Throwable $th) {
-    echo "[ERROR] " . $th->getMessage() . PHP_EOL;
+    echo "[ERROR] " . $th->getMessage() . " | File: " . $th->getFile() . " | Line: " . $th->getLine() . PHP_EOL;
 }
