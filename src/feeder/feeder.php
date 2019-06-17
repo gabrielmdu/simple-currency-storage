@@ -1,6 +1,6 @@
 <?php
 
-require_once "CurrencyDB.class.php";
+require_once "../include/CurrencyDB.class.php";
 
 try {
     $db = new CurrencyDB();
@@ -24,9 +24,10 @@ try {
 
         $timezone = new DateTimeZone("America/Sao_Paulo");
         $datetime = new DateTime("now", $timezone);
+        $dtStr = $datetime->format("Y-m-d H:i:s");
         
         foreach ($jsonArr["rates"] as $rate => $value) {
-            $db->insertRate($jsonArr["base"], $rate, $value, $datetime->format("Y-m-d H:i:s"));
+            $db->insertRate($jsonArr["base"], $rate, $value, $dtStr);
         }
 
         sleep(10);
