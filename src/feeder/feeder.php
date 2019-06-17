@@ -6,10 +6,28 @@ try {
     $db = new CurrencyDB();
     $db->connect();
 
+    // currency that will be matched/converted against others
+    $baseCurrency = "BRL";
+
+    // currencies to be matched/converted according to the base
+    $symbols = [
+        "USD",
+        "EUR",
+        "GBP"
+    ];
+
+    $ratesUrl = "https://api.exchangeratesapi.io/latest?base=" . $baseCurrency . "&symbols=" . implode(",", $symbols);
+    
     while (true) {
-        $db->insertRate("BRL", "USD", mt_rand(0, 10 * 10000000) / 1000000);
-        $db->insertRate("BRL", "GBP", mt_rand(0, 10 * 10000000) / 1000000);
-        $db->insertRate("BRL", "EUR", mt_rand(0, 10 * 10000000) / 1000000);
+        $jsonStr = file_get_contents($ratesUrl);
+        $jsonArr = json_decode($jsonStr, true);
+
+        $timezone = new DateTimeZone("America/Sao_Paulo");
+        $datetime = new DateTime("now", $timezone);
+        
+        foreach ($jsonArr["rates"] as $rate => $value) {
+            $db->insertRate($jsonArr["base"], $rate, $value, $datetime->format("Y-m-d H:i:s"));
+        }
 
         sleep(10);
     }
