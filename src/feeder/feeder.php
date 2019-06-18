@@ -17,7 +17,7 @@ try {
     ];
 
     $ratesUrl = "https://api.exchangeratesapi.io/latest?base=" . $baseCurrency . "&symbols=" . implode(",", $symbols);
-    
+
     while (true) {
         $jsonStr = file_get_contents($ratesUrl);
         $jsonArr = json_decode($jsonStr, true);
@@ -25,7 +25,7 @@ try {
         $timezone = new DateTimeZone("America/Sao_Paulo");
         $datetime = new DateTime("now", $timezone);
         $dtStr = $datetime->format("Y-m-d H:i:s");
-        
+
         foreach ($jsonArr["rates"] as $rate => $value) {
             $db->insertRate($jsonArr["base"], $rate, $value, $dtStr);
         }

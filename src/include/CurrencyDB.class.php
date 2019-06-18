@@ -13,7 +13,7 @@ class CurrencyDB
      * @return void
      * @throws Exception If connection failed
      */
-    public function connect() : void
+    public function connect(): void
     {
         try {
             $host = "db";
@@ -34,9 +34,9 @@ class CurrencyDB
      * @param  float $value The converted rate value
      * @param  string $datetime The datetime when it was inserted
      *
-     * @return bool The insertion result
+     * @return bool Returns whether the query execution was successful or not
      */
-    public function insertRate(string $base, string $symbol, float $value, string $datetime = null) : bool
+    public function insertRate(string $base, string $symbol, float $value, string $datetime = null): bool
     {
         try {
             $stmt = $this->conn->prepare("INSERT INTO rates (BASE, SYMBOL, VALUE, DATETIME)
@@ -53,8 +53,51 @@ class CurrencyDB
             $stmt->bindParam("datetime", $datetime);
 
             return $stmt->execute();
-        } catch (\Throwable $e) {
-            throw new \Exception("Could not execute query: " . $e->getMessage());
+        } catch (\Throwable $th) {
+            throw new \Exception("Could not insert rate: " . $th->getMessage());
+        }
+    }
+
+    /**
+     * Select all rates greater than a given id
+     *
+     * @param  int $id The result will get the rates greater than this id
+     * @param  int $limit A limiter to the result to prevent memory problems
+     *
+     * @return array The selection result
+     */
+    public function selectRates(int $id = 0, int $limit = 200): array
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM rates WHERE id > :id ORDER BY id LIMIT :limit");
+
+            $stmt->bindParam("id", $id);
+            $stmt->bindParam("limit", intval($limit), PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Throwable $th) {
+            throw new \Exception("Could not retrieve rates: " . $th->getMessage());
+        }
+    }
+
+    /**
+     * Deletes a rate record
+     *
+     * @param  int $id The rate id
+     *
+     * @return bool Returns whether the query execution was successful or not
+     */
+    public function deleteRate(int $id): bool
+    {
+        try {
+            $stmt = $this->conn->prepare("DELETE FROM rates WHERE id = :id");
+
+            $stmt->bindParam("id", $id);
+
+            return $stmt->execute();
+        } catch (\Throwable $th) {
+            throw new \Exception("Could not retrieve rates: " . $th->getMessage());
         }
     }
 }

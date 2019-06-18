@@ -8,6 +8,8 @@ services:
       - 8080:80
     volumes:
       - ./src:/home/simple-currency-storage
+    environment:
+      WEB_DOCUMENT_ROOT: /home/simple-currency-storage/app
     links:
       - db
 
