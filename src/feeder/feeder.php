@@ -3,7 +3,7 @@
 require_once "../include/CurrencyDB.class.php";
 
 try {
-    $db = new CurrencyDB();
+    $db = new \CurrencyDB();
     $db->connect();
 
     // currency that will be matched/converted against others
@@ -22,8 +22,8 @@ try {
         $jsonStr = file_get_contents($ratesUrl);
         $jsonArr = json_decode($jsonStr, true);
 
-        $timezone = new DateTimeZone("America/Sao_Paulo");
-        $datetime = new DateTime("now", $timezone);
+        $timezone = new \DateTimeZone("America/Sao_Paulo");
+        $datetime = new \DateTime("now", $timezone);
         $dtStr = $datetime->format("Y-m-d H:i:s");
 
         foreach ($jsonArr["rates"] as $rate => $value) {

@@ -3,7 +3,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/../include/CurrencyDB.class.php";
 
 try {
-    $db = new CurrencyDB();
+    $db = new \CurrencyDB();
     $db->connect();
 
     switch ($_SERVER["REQUEST_METHOD"]) {
