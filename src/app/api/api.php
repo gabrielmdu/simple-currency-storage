@@ -3,6 +3,8 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/../include/CurrencyDB.class.php";
 
 try {
+    header("Content-type:application/json");
+
     $db = new \CurrencyDB();
     $db->connect();
 
@@ -23,7 +25,13 @@ try {
             echo json_encode([
                 "success" => $db->deleteRate($id)
             ]);
-            break;
+	    break;
+
+        default:
+            echo json_encode([
+                "success" => false,
+                "message" => "Request unknown"
+            ]);
     }
 } catch (\Throwable $th) {
     echo json_encode([
