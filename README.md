@@ -19,3 +19,5 @@ To start the services, run
 Then run the feeder script to begin database population
 
     docker-compose exec -d webserver php /home/simple-currency-storage/feeder/feeder.php
+
+Open localhost:8080
