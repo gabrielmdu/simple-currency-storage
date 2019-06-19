@@ -18,6 +18,7 @@ try {
 
     $ratesUrl = "https://api.exchangeratesapi.io/latest?base=" . $baseCurrency . "&symbols=" . implode(",", $symbols);
 
+    // infinite loop where the rates are fetched
     while (true) {
         $jsonStr = file_get_contents($ratesUrl);
         $jsonArr = json_decode($jsonStr, true);
@@ -30,7 +31,7 @@ try {
             $db->insertRate($jsonArr["base"], $rate, $value, $dtStr);
         }
 
-        sleep(10);
+        sleep(60);
     }
 } catch (\Throwable $th) {
     echo "[ERROR] " . $th->getMessage() . " | File: " . $th->getFile() . " | Line: " . $th->getLine() . PHP_EOL;
