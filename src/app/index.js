@@ -34,15 +34,15 @@ window.addEventListener("load", (evt) => {
                     if (!json.success) {
                         console.error(json.message);
                     }
-                });
-
+                })
+                .catch(reason => console.error("Fetch error: " + reason.message));
         });
 
         // hides the row
         parentRow.classList.add("hidden");
     }
 
-    // creates a td with deletion and hiding options 
+    // creates a td with deletion and hiding options
     function createTdOptions() {
         let tdOptions = document.createElement("td");
 
@@ -63,7 +63,7 @@ window.addEventListener("load", (evt) => {
         let table = document.getElementsByClassName("table")[0];
         let tbody = table.querySelector("tbody");
 
-        // since the rates are grouped by their datetimes, loops through its keys 
+        // since the rates are grouped by their datetimes, loops through its keys
         Object.keys(rates).forEach(datetime => {
             let currentRates = rates[datetime];
 
@@ -119,10 +119,11 @@ window.addEventListener("load", (evt) => {
 
                 // the current id is now the last one from the result
                 currentId = data.rates[data.rates.length - 1].id;
-                
+
                 let rates = groupBy("datetime")(data.rates);
                 addDataRows(rates);
-            });
+            })
+            .catch(reason => console.error("Fetch error: " + reason.message));
     }
 
     // creates a countdown timer to fetch rates every given seconds

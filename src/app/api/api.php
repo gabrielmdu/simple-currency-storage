@@ -8,31 +8,35 @@ try {
     $db = new \CurrencyDB();
     $db->connect();
 
+    $response = [];
+
     switch ($_SERVER["REQUEST_METHOD"]) {
         case "GET":
             $id = $_GET["id"] ?? 0;
             $rates = $db->selectRates($id);
 
-            echo json_encode([
+            $response = [
                 "success" => true,
                 "rates" => $rates
-            ]);
+            ];
             break;
 
         case "DELETE":
             $id = $_GET["id"];
 
-            echo json_encode([
+            $response = [
                 "success" => $db->deleteRate($id)
-            ]);
-	    break;
+            ];
+            break;
 
         default:
-            echo json_encode([
+            $response = [
                 "success" => false,
                 "message" => "Request unknown"
-            ]);
+            ];
     }
+
+    echo json_encode($response);
 } catch (\Throwable $th) {
     echo json_encode([
         "success" => false,
