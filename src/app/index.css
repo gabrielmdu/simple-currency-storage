@@ -1,0 +1,44 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+i {
+    cursor: pointer;
+}
+
+#main {
+    height: 100%;
+}
+
+#rates {
+    max-height: 265px;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+.new-row {
+    animation: show-anim 1s ease;
+}
+
+@keyframes show-anim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none;
+}
