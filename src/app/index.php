@@ -28,9 +28,9 @@
                     <thead>
                         <tr>
                             <th>Last update</th>
-                            <th>USD</th>
-                            <th>EUR</th>
-                            <th>GBP</th>
+                            <th class="text-center th-rate">USD</th>
+                            <th class="text-center th-rate">EUR</th>
+                            <th class="text-center th-rate">GBP</th>
                             <th></th>
                         </tr>
                     </thead>

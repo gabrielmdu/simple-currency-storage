@@ -88,6 +88,7 @@ window.addEventListener("load", (evt) => {
 
                 currentTd.setAttribute("data-id", rate.id);
                 currentTd.classList.add("rate");
+                currentTd.classList.add("text-center");
                 currentTd.textContent = rate.value ? parseFloat(rate.value).toFixed(2) : "-";
             });
 

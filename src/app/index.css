@@ -4,25 +4,51 @@ body {
     height: 100%;
 }
 
-thead th {
-    position: sticky;
-    top: 0;
-    background: white;
-}
-
-i {
-    cursor: pointer;
-}
-
 #main {
     height: 100%;
 }
 
 #rates {
-    max-height: 265px;
+    max-height: 332px;
     overflow-y: auto;
     position: sticky;
     top: 0;
+}
+
+#rates thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+#rates {
+    border: 1px solid #000;
+    border-left: 0;
+    border-right: 0;
+}
+
+#rates th,
+td {
+    border: 1px solid white;
+    border-top: 0;
+}
+
+#rates tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.th-rate {
+    border: 1px solid black;
+}
+
+i {
+    cursor: pointer;
+    opacity: 0.2;
+}
+
+i:hover {
+    opacity: 1;
 }
 
 .new-row {
