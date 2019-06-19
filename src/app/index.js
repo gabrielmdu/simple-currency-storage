@@ -74,7 +74,8 @@ window.addEventListener("load", (evt) => {
             let tdGBP = document.createElement("td");
             let tdOptions = createTdOptions();
 
-            tdUpdate.textContent = datetime;
+            dt = new Date(datetime);
+            tdUpdate.textContent = dt.toLocaleString();
 
             // each datetime will probably have 3 rate values, looped and assigned accordingly
             currentRates.forEach(rate => {

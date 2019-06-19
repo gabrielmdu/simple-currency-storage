@@ -6,8 +6,10 @@ body {
 
 #main {
     height: 100%;
+    background: #e0e5ef;
 }
 
+/* fixed header - https://stackoverflow.com/questions/21168521/table-fixed-header-and-scrollable-body */
 #rates {
     max-height: 332px;
     overflow-y: auto;
@@ -15,23 +17,28 @@ body {
     top: 0;
 }
 
-#rates thead th {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 1;
-}
-
 #rates {
-    border: 1px solid #000;
+    border: 1px solid #697b80;
     border-left: 0;
     border-right: 0;
 }
 
+#rates thead th {
+    position: sticky;
+    top: 0;
+    background: #383838;
+    z-index: 1;
+}
+
 #rates th,
 td {
-    border: 1px solid white;
+    color: #f3f3f3;
+    border: 1px solid #697b80;
     border-top: 0;
+}
+
+#rates td {
+    background: #697b80;
 }
 
 #rates tbody tr:last-child td {
@@ -39,7 +46,7 @@ td {
 }
 
 .th-rate {
-    border: 1px solid black;
+    color: #f9c300 !important;
 }
 
 i {
