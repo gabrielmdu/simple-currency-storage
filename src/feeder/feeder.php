@@ -1,6 +1,6 @@
 <?php
 
-require_once "../include/CurrencyDB.class.php";
+require_once __DIR__ . "/../include/CurrencyDB.class.php";
 
 try {
     $db = new \CurrencyDB();

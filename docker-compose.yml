@@ -12,6 +12,8 @@ services:
       WEB_DOCUMENT_ROOT: /home/simple-currency-storage/app
     links:
       - db
+    depends_on: 
+      - db
 
   db:
     image: mysql
